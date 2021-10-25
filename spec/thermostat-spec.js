@@ -22,5 +22,10 @@ describe('Thermostat', function() {
       thermostat.down();
       expect(thermostat.temperature).toBe(19);
     });
+
+    it('does not go lower than 10', function() {
+      thermostat.down(11);
+      expect(thermostat.temperature).toBe(10);
+    });
   });
 });

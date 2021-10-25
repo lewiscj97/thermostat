@@ -7,7 +7,9 @@ class Thermostat {
     this.temperature += 1;
   };
 
-  down() {
-    this.temperature -= 1;
+  down(num = 1) {
+    for(let i = 0; i < num; i++) {
+      this.temperature == 10 ? this.temperature = 10 : this.temperature -= 1;
+    };
   };
 };
