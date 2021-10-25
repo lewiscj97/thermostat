@@ -4,12 +4,24 @@ class Thermostat {
     this.powerSavingMode = true;
   };
 
-  up() {
-    this.temperature += 1;
+  togglePowerSavingMode() {
+    this.powerSavingMode = !this.powerSavingMode;
+  }
+
+  up(num = 1) {
+    if (this.powerSavingMode == true) {
+      for (let x = 0; x < num; x++) {
+        this.temperature == 25 ? this.temperature = 25 : this.temperature += 1;
+      };
+    } else {
+      for (let y = 0; y < num; y++) {
+        this.temperature == 32 ? this.temperature = 32 : this.temperature += 1;
+      };
+    };
   };
 
   down(num = 1) {
-    for(let i = 0; i < num; i++) {
+    for (let i = 0; i < num; i++) {
       this.temperature == 10 ? this.temperature = 10 : this.temperature -= 1;
     };
   };

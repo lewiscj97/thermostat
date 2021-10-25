@@ -33,5 +33,15 @@ describe('Thermostat', function() {
     it('is on by default', function() {
       expect(thermostat.powerSavingMode).toBe(true);
     });
+
+    it('is on by default and can be turned off', function() {
+      thermostat.togglePowerSavingMode();
+      expect(thermostat.powerSavingMode).toBe(false);
+    });
+
+    it('if on, the maximum temperature is 25', function() {
+      thermostat.up(20);
+      expect(thermostat.temperature).toBe(25);
+    });
   });
 });
