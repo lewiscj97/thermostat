@@ -25,7 +25,7 @@ class Thermostat {
   up(num = 1) {
     if (this.powerSavingMode == true) {
       for (let x = 0; x < num; x++) {
-        this.temperature == 25 ? this.temperature = 25 : this.temperature += 1;
+        this.temperature >= 25 ? this.temperature = 25 : this.temperature += 1;
       };
     } else {
       for (let y = 0; y < num; y++) {
