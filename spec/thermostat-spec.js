@@ -43,5 +43,19 @@ describe('Thermostat', function() {
       thermostat.up(20);
       expect(thermostat.temperature).toBe(25);
     });
+
+    it('if off, the maximum temperature is 32', function() {
+      thermostat.togglePowerSavingMode();
+      thermostat.up(20);
+      expect(thermostat.temperature).toBe(32);
+    });
+  });
+
+  describe('reset', function() {
+    it('resets the temperature back to 20', function() {
+      thermostat.up(10);
+      thermostat.reset();
+      expect(thermostat.temperature).toBe(20);
+    });
   });
 });

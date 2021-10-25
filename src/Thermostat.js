@@ -6,7 +6,11 @@ class Thermostat {
 
   togglePowerSavingMode() {
     this.powerSavingMode = !this.powerSavingMode;
-  }
+  };
+
+  reset() {
+    this.temperature = 20;
+  };
 
   up(num = 1) {
     if (this.powerSavingMode == true) {
