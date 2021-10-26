@@ -1,0 +1,30 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+  color: rgb(50, 61, 72);
+  text-align: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background-color: rgb(241, 213, 175);
+}
+
+#current-temperature {
+  font-size: 100px;
+  margin-top: 0%;
+  margin-bottom: 15%;
+}
+
+#location {
+  display: flex;
+  flex-direction: column;
+}
+
+#current-location {
+  text-align: center;
+}
+
+.location-flex {
+  height: 30px;
+  margin-bottom: 10px;
+}

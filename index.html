@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/stylesheet.css">
   <script src="/src/Thermostat.js"></script>
   <script src="/interface.js"></script>
   <title>Thermostat</title>
@@ -11,7 +15,6 @@
 <body>
 <h1>Thermostat</h1>
   <section id="temperature-display">
-    <h2>Current Temperature:</h2>
     <p id="current-temperature"></p>
   </section>
   <section id="temperature-controls">
@@ -27,17 +30,17 @@
     <p id="current-energy-usage-status"></p>
   </section>
   <section id="location">
-    <h2>Location:</h2>
-
-    <select name="current-location" id="current-location">
+    <h2 class="location-flex">Location:</h2>
+    <select class="location-flex" name="current-location" id="current-location">
       <option value="london" selected>London</option>
       <option value="paris">Paris</option>
       <option value="newcastle">Newcastle</option>
       <option value="manchester">Manchester</option>
     </select>
-
-    <span>Temperature: </span>
-    <span id="current-location-temperature"></span>
+    <div class="location-flex">
+      <span>Temperature: </span>
+      <span id="current-location-temperature"></span>
+    </div>
   </section>
 </body>
 </html>
