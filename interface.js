@@ -1,4 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
+
+  fetch('http://localhost:4567/temperature', {mode: 'no-cors'})
+  .then(response => console.log(response));
+
   const updateTemperature = () => {
     let temperature = document.querySelector('#current-temperature');
     temperature.innerText = `${thermostat.temperature}ºC`;
@@ -7,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else if (thermostat.currentEnergyUsage() == 'medium-usage') {
       temperature.style.color = '#323D48';
     } else {
-      temperature.style.color = ' #C04C4B';
+      temperature.style.color = '#C04C4B';
     };
   };
 
