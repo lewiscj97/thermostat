@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const updateTemperature = () => {
-    document.querySelector('#current-temperature').innerText = thermostat.temperature;
+    document.querySelector('#current-temperature').innerText = `${thermostat.temperature}ºC`;
   };
 
   const updatePowerSavingMode = () => {
@@ -41,4 +41,10 @@ document.addEventListener("DOMContentLoaded", () => {
     thermostat.togglePowerSavingMode();
     updateThermostat();
   });
+
+  const temp = document.querySelector('#current-location-temperature');
+  
+  fetch('https://api.openweathermap.org/data/2.5/weather?q=London,UK&appid=f5efac56927da98c8a2581a6d1e09d41&units=metric')
+  .then(response => response.json())
+  .then(data => temp.innerText = `${data.main.temp}ºC`);
 });
