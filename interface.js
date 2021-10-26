@@ -1,6 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
   const updateTemperature = () => {
-    document.querySelector('#current-temperature').innerText = `${thermostat.temperature}ºC`;
+    let temperature = document.querySelector('#current-temperature');
+    temperature.innerText = `${thermostat.temperature}ºC`;
+    if(thermostat.currentEnergyUsage() == 'low-usage') {
+      temperature.style.color = '#6EA4BB';
+    } else if (thermostat.currentEnergyUsage() == 'medium-usage') {
+      temperature.style.color = '#323D48';
+    } else {
+      temperature.style.color = ' #C04C4B';
+    };
   };
 
   const loadCurrentCityTemperature = () => {
@@ -23,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const updateThermostat = () => {
     updateTemperature();
     updatePowerSavingMode();
-    updateCurrentEnergyUsage();
+    // updateCurrentEnergyUsage();
   }
 
   const thermostat = new Thermostat();
@@ -57,4 +65,6 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(response => response.json())
     .then(data => temp.innerText = `${data.main.temp}ºC`);
   });
+
+
 });

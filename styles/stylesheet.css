@@ -28,3 +28,20 @@ body {
   height: 30px;
   margin-bottom: 10px;
 }
+
+button {
+  border-radius: 6px;
+  padding: 2%;
+  margin: 2%;
+  width: 40%;
+  color: azure;
+  background-color: rgb(232, 149, 90);
+}
+
+button:hover {
+  box-shadow: 0 8px 10px 0 rgba(61, 61, 61, 0.24), 0 17px 50px 0 rgba(61, 61, 61, 0.24);
+}
+
+#power-saving-mode-toggle {
+  width: 70%;
+}
