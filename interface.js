@@ -23,15 +23,9 @@ document.addEventListener("DOMContentLoaded", () => {
     powerSaving.innerHTML = thermostat.powerSavingMode ? 'On' : 'Off';
   };
 
-  const updateCurrentEnergyUsage = () => {
-    let energyUsage = document.querySelector('#current-energy-usage-status');
-    energyUsage.innerHTML = thermostat.currentEnergyUsage();
-  };
-
   const updateThermostat = () => {
     updateTemperature();
     updatePowerSavingMode();
-    // updateCurrentEnergyUsage();
   }
 
   const thermostat = new Thermostat();
