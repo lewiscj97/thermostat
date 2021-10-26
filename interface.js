@@ -3,6 +3,13 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector('#current-temperature').innerText = `${thermostat.temperature}ºC`;
   };
 
+  const loadCurrentCityTemperature = () => {
+    const temp = document.querySelector('#current-location-temperature');
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=London&appid=f5efac56927da98c8a2581a6d1e09d41&units=metric`)
+    .then(response => response.json())
+    .then(data => temp.innerText = `${data.main.temp}ºC`);
+  };
+
   const updatePowerSavingMode = () => {
     let powerSaving = document.querySelector('#power-saving-mode-status');
     powerSaving.innerHTML = thermostat.powerSavingMode ? 'On' : 'Off';
@@ -21,6 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const thermostat = new Thermostat();
   updateThermostat();
+  loadCurrentCityTemperature();
 
   document.querySelector('#temperature-up').addEventListener('click', () => {
     thermostat.up();
@@ -42,9 +50,11 @@ document.addEventListener("DOMContentLoaded", () => {
     updateThermostat();
   });
 
-  const temp = document.querySelector('#current-location-temperature');
-  
-  fetch('https://api.openweathermap.org/data/2.5/weather?q=London,UK&appid=f5efac56927da98c8a2581a6d1e09d41&units=metric')
-  .then(response => response.json())
-  .then(data => temp.innerText = `${data.main.temp}ºC`);
+  document.querySelector('#current-location').addEventListener('change', (location) => {
+    const temp = document.querySelector('#current-location-temperature');
+    city = location.target.value;
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=f5efac56927da98c8a2581a6d1e09d41&units=metric`)
+    .then(response => response.json())
+    .then(data => temp.innerText = `${data.main.temp}ºC`);
+  });
 });
