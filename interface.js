@@ -11,6 +11,14 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       temperature.style.color = '#C04C4B';
     };
+
+    fetch(`http://localhost:4567/temperature?temp=${thermostat.temperature}`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "applications/json",
+        "Accept": "applications/json"
+     },
+    });
   };
 
   const loadCurrentCityTemperature = () => {
@@ -32,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const thermostat = new Thermostat();
 
-  let responseData = {};
+  // let responseData = {};
 
   // const getData = () => {
   //   fetch('http://localhost:4567/temperature',)

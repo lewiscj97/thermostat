@@ -20,7 +20,12 @@ class Thermostat < Sinatra::Base
     
   end
 
-  get '/temperature' do
-    data.to_json
+  # get '/temperature' do
+  #   data.to_json
+  # end
+
+  post '/temperature' do
+    data[:temperature] = params['temp']
+    redirect('/')
   end
 end
