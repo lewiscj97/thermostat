@@ -1,9 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-
-  fetch('http://localhost:4567/temperature',)
-  .then(response => response.json())
-  .then(data => console.log(data));
-
   const updateTemperature = () => {
     let temperature = document.querySelector('#current-temperature');
     temperature.innerText = `${thermostat.temperature}ºC`;
@@ -34,6 +29,18 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const thermostat = new Thermostat();
+
+  fetch('http://localhost:4567/temperature',)
+  .then(response => response.json())
+  .then(data => {
+    let temperature = data.temperature;
+    let powerSaving = data.power_saving;
+    let location = data.location;
+
+    thermostat.temperature = temperature;
+    thermostat.powerSavingMode = powerSaving;
+  });
+
   updateThermostat();
   loadCurrentCityTemperature();
 

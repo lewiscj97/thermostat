@@ -10,13 +10,17 @@ class Thermostat < Sinatra::Base
   set :allow_headers, "content-type,if-modified-since"
   set :expose_headers, "location,link"
 
-  enable :sessions
+  data = {
+    temperature: '15',
+    power_saving: true,
+    location: 'Manchester'
+  }
 
   get '/' do
     
   end
 
   get '/temperature' do
-    {'data': 8}.to_json
+    data.to_json
   end
 end
