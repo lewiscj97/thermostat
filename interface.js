@@ -1,7 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   const updateTemperature = () => {
+    data = getData();
+    console.log(data);
     let temperature = document.querySelector('#current-temperature');
-    temperature.innerText = `${thermostat.temperature}ºC`;
+    temperature.innerText = `${data.temperature}ºC`;
     if(thermostat.currentEnergyUsage() == 'low-usage') {
       temperature.style.color = '#6EA4BB';
     } else if (thermostat.currentEnergyUsage() == 'medium-usage') {
@@ -30,16 +32,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const thermostat = new Thermostat();
 
-  fetch('http://localhost:4567/temperature',)
-  .then(response => response.json())
-  .then(data => {
-    let temperature = data.temperature;
-    let powerSaving = data.power_saving;
-    let location = data.location;
+  let responseData = {};
 
-    thermostat.temperature = temperature;
-    thermostat.powerSavingMode = powerSaving;
-  });
+  const getData = () => {
+    fetch('http://localhost:4567/temperature',)
+    .then(response => response.json())
+    .then(data => {
+       responseData['temperature'] = data.temperature;
+    });
+    return responseData;
+  };
 
   updateThermostat();
   loadCurrentCityTemperature();
