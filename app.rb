@@ -20,6 +20,10 @@ class Thermostat < Sinatra::Base
     
   end
 
+  get '/temperature' do
+    data.to_json
+  end
+
   post '/temperature' do
     data[:temperature] = params['temp']
     data[:power_saving] = params['power-saving']
