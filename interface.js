@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  fetch('http://localhost:4567/temperature', {mode: 'no-cors'})
-  .then(response => console.log(response));
+  fetch('http://localhost:4567/temperature',)
+  .then(response => response.json())
+  .then(data => console.log(data));
 
   const updateTemperature = () => {
     let temperature = document.querySelector('#current-temperature');
