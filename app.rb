@@ -13,19 +13,18 @@ class Thermostat < Sinatra::Base
   data = {
     temperature: '15',
     power_saving: true,
-    location: 'Manchester'
+    city: 'manchester'
   }
 
   get '/' do
     
   end
 
-  # get '/temperature' do
-  #   data.to_json
-  # end
-
   post '/temperature' do
     data[:temperature] = params['temp']
+    data[:power_saving] = params['power-saving']
+    data[:city] = params['city']
+    p data
     redirect('/')
   end
 end

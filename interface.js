@@ -1,4 +1,16 @@
 document.addEventListener("DOMContentLoaded", () => {
+
+  let city = 'london';
+
+  document.querySelector('#current-location').addEventListener('change', (location) => {
+    const temp = document.querySelector('#current-location-temperature');
+    city = location.target.value;
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=f5efac56927da98c8a2581a6d1e09d41&units=metric`)
+    .then(response => response.json())
+    .then(data => temp.innerText = `${data.main.temp}ºC`);
+    updateThermostat();
+  });
+
   const updateTemperature = () => {
     // data = getData();
     // console.log(data);
@@ -11,14 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       temperature.style.color = '#C04C4B';
     };
-
-    fetch(`http://localhost:4567/temperature?temp=${thermostat.temperature}`, {
-      method: 'POST',
-      headers: {
-        "Content-Type": "applications/json",
-        "Accept": "applications/json"
-     },
-    });
   };
 
   const loadCurrentCityTemperature = () => {
@@ -36,7 +40,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const updateThermostat = () => {
     updateTemperature();
     updatePowerSavingMode();
+    postData();
   }
+
+  const postData = () => {
+    fetch(`http://localhost:4567/temperature?temp=${thermostat.temperature}&power-saving=${thermostat.powerSavingMode}&city=${city}`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "applications/json",
+        "Accept": "applications/json"
+      },
+    });
+  };
 
   const thermostat = new Thermostat();
 
@@ -73,14 +88,4 @@ document.addEventListener("DOMContentLoaded", () => {
     thermostat.togglePowerSavingMode();
     updateThermostat();
   });
-
-  document.querySelector('#current-location').addEventListener('change', (location) => {
-    const temp = document.querySelector('#current-location-temperature');
-    city = location.target.value;
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=f5efac56927da98c8a2581a6d1e09d41&units=metric`)
-    .then(response => response.json())
-    .then(data => temp.innerText = `${data.main.temp}ºC`);
-  });
-
-
 });
