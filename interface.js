@@ -2,15 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const thermostat = new Thermostat();
   let city;
 
-  document.querySelector('#current-location').addEventListener('change', (location) => {
-    const temp = document.querySelector('#current-location-temperature');
-    city = location.target.value;
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=f5efac56927da98c8a2581a6d1e09d41&units=metric`)
-    .then(response => response.json())
-    .then(data => temp.innerText = `${data.main.temp}ºC`);
-    updateThermostat();
-  });
-
   const updateTemperature = () => {
     let temperature = document.querySelector('#current-temperature');
     temperature.innerText = `${thermostat.temperature}ºC`;
@@ -51,6 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
   
+  // Get values from API
   fetch('http://localhost:4567/temperature', {
     method: 'GET',
     headers: {
@@ -65,9 +57,8 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector('#current-location').value = data.city;
     city = data.city;
     updateThermostat();
+    loadCurrentCityTemperature();
   });
-
-  loadCurrentCityTemperature();
 
   document.querySelector('#temperature-up').addEventListener('click', () => {
     thermostat.up();
@@ -86,6 +77,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.querySelector('#power-saving-mode-toggle').addEventListener('click', () => {
     thermostat.togglePowerSavingMode();
+    updateThermostat();
+  });
+
+  document.querySelector('#current-location').addEventListener('change', (location) => {
+    const temp = document.querySelector('#current-location-temperature');
+    city = location.target.value;
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=f5efac56927da98c8a2581a6d1e09d41&units=metric`)
+    .then(response => response.json())
+    .then(data => temp.innerText = `${data.main.temp}ºC`);
     updateThermostat();
   });
 });
