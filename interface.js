@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const thermostat = new Thermostat();
-  let city = 'london';
+  let city;
 
   document.querySelector('#current-location').addEventListener('change', (location) => {
     const temp = document.querySelector('#current-location-temperature');
@@ -51,19 +51,22 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
   
-  let x = fetch('http://localhost:4567/temperature', {
+  fetch('http://localhost:4567/temperature', {
     method: 'GET',
     headers: {
       "Content-Type": "applications/json",
-        "Accept": "applications/json"
+      "Accept": "applications/json"
     },
   })
   .then(response => {return response.json()})
-  .then(data => {return thermostat.temperature = data.temperature});
+  .then(data => {
+    thermostat.temperature = parseInt(data.temperature);
+    thermostat.powerSavingMode = data.power_saving === true;
+    document.querySelector('#current-location').value = data.city;
+    city = data.city;
+    updateThermostat();
+  });
 
-  console.log(thermostat.temperature);
-
-  updateThermostat();
   loadCurrentCityTemperature();
 
   document.querySelector('#temperature-up').addEventListener('click', () => {

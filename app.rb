@@ -21,12 +21,13 @@ class Thermostat < Sinatra::Base
   end
 
   get '/temperature' do
+    content_type :json
     data.to_json
   end
 
   post '/temperature' do
     data[:temperature] = params['temp']
-    data[:power_saving] = params['power-saving']
+    data[:power_saving] = params['power-saving'] == 'true'
     data[:city] = params['city']
     p data
     redirect('/')
